@@ -27,7 +27,7 @@ jobs:
      - name: Run 'Liquibase status' in a Docker Container
        uses: docker://liquibase/liquibase:latest
        with:
-          args: --url=${{ secrets.SF_ACCOUNT }} --changeLogFile=/PROPERTIES_BUSINESS/PROCESSED/schema_changelog.xml --username=${{ secrets.SF_USERNAME }} --password=${{ secrets.SF_PASSWORD }} --driver=/PROPERTIES_BUSINESS/snowflake-jdbc-3.13.19.jar --defaultSchemaName=${{ secrets.SF_SCHMEA }} status
+          args: --url=${{ secrets.SF_ACCOUNT }} --changeLogFile=/PROPERTIES_BUSINESS/PROCESSED/schema_changelog.xml --username=${{ secrets.SF_USERNAME }} --password=${{ secrets.SF_PASSWORD }} --driver=snowflake-jdbc-3.13.19.jar --defaultSchemaName=${{ secrets.SF_SCHMEA }} status
       
 
 #  deploy code to target database 
