@@ -28,10 +28,10 @@ jobs:
        uses: docker://liquibase/liquibase:latest
        with:
           args: --url=${{ secrets.SF_ACCOUNT }} --changelogFile=/PROPERTIES_BUSINESS/PROCESSED/schema_changelog.xml --username=${{ secrets.SF_USERNAME }} --password=${{ secrets.SF_PASSWORD }} --driver=${{ secrets.SF_DRIVER}} --defaultSchemaName=${{ secrets.SF_SCHMEA }} status
-       run: echo Status check completed!
+       # run: echo Status check completed!
 
      - name: Run 'Liquibase update' in a Docker Container
        uses: docker://liquibase/liquibase:latest
        with:
           args: --url=${{ secrets.SF_ACCOUNT }} --changelogFile=/PROPERTIES_BUSINESS/PROCESSED/schema_changelog.xml --username=${{ secrets.SF_USERNAME }} --password=${{ secrets.SF_PASSWORD }} --driver=${{ secrets.SF_DRIVER}} --defaultSchemaName=${{ secrets.SF_SCHMEA }} --logLevel=debug update
-       run: echo update has been completed!
+       # run: echo update has been completed!
