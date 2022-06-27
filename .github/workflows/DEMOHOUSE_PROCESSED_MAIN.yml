@@ -7,7 +7,7 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
-  path:
+    paths:
     - 'PROPERTIES_BUSINESS/PROCESSED/**'
  #  pull_request:
  #   branches: [ "main" ]
@@ -18,21 +18,20 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   LBJobDockerCLI:
-     runs-on: ubuntu-latest
+     runs-on: ubuntu-latest     
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
+     steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+     - uses: actions/checkout@v2
       #  note the below assumes that a hist path or volume is mounted into the docker container at //Docker else action will fail
-      - name: Run 'Liquibase status' in a Docker Container
-        uses: docker://liquibase/liquibase:latest
-        with:
+     - name: Run 'Liquibase status' in a Docker Container
+       uses: docker://liquibase/liquibase:latest
+       with:
           args: --url=${{ secrets.SF_ACCOUNT }} --changelogFile=/PROPERTIES_BUSINESS/PROCESSED/schema_changelog.xml --username=${{ secrets.SF_USERNAME }} --password=${{ secrets.SF_PASSWORD }} --driver=${{ secrets.SF_DRIVER}} --defaultSchemaName=${{ secrets.SF_SCHMEA }} status
-        run: echo Status check completed!
+       run: echo Status check completed!
 
-      - name: Run 'Liquibase update' in a Docker Container
-        uses: docker://liquibase/liquibase:latest
-        with:
+     - name: Run 'Liquibase update' in a Docker Container
+       uses: docker://liquibase/liquibase:latest
+       with:
           args: --url=${{ secrets.SF_ACCOUNT }} --changelogFile=/PROPERTIES_BUSINESS/PROCESSED/schema_changelog.xml --username=${{ secrets.SF_USERNAME }} --password=${{ secrets.SF_PASSWORD }} --driver=${{ secrets.SF_DRIVER}} --defaultSchemaName=${{ secrets.SF_SCHMEA }} --logLevel=debug update
-        run: echo update has been completed!
+       run: echo update has been completed!
