@@ -1,1 +1,1 @@
-# DemoHouse
+# DemoHouse : Repository for Data Engineering demohouse project
